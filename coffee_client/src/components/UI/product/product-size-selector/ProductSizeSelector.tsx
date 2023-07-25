@@ -1,5 +1,4 @@
 import React, {Dispatch, FC, SetStateAction} from 'react';
-import {Select} from "@chakra-ui/react";
 import styles from './ProductSizeSelector.module.scss';
 import {Button} from "@chakra-ui/button";
 import {TypeSize} from "@/store/cart/cart.types";
@@ -26,7 +25,7 @@ const ProductSizeSelector:FC<IVariantSelector> = ({selectedSize, setSelectedSize
            )
          }>
                     {sizes.map(size => (
-                        <Button
+                        <Button key={size}
                             onClick={() => setSelectedSize(size)}
                             className={cn(styles.variant, {
                                 [styles.active]: size === selectedSize,
@@ -38,7 +37,8 @@ const ProductSizeSelector:FC<IVariantSelector> = ({selectedSize, setSelectedSize
                         >
                             {size}
                         </Button>
-                    ))}
+                    )
+                    )}
 
          </div>
 

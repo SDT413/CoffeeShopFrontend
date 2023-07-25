@@ -1,6 +1,6 @@
 import {Dispatch, SetStateAction} from "react";
 
-export enum EnumSorting {
+export enum EnumSort {
     INCREASING_PRICE = 'INCREASING_PRICE',
     DECREASING_PRICE = 'DECREASING_PRICE',
     NEWEST = 'NEWEST',
@@ -9,10 +9,15 @@ export enum EnumSorting {
 
 export interface SortingInterface {
     name: 'Increasing price' | 'Decreasing price' | 'Newest' | 'Oldest';
-    value: EnumSorting;
+    value: EnumSort;
 }
 
 export interface ISortingProps {
-    sortingType: EnumSorting;
-    setSortingType: Dispatch<SetStateAction<EnumSorting>>
+    sortType: EnumSort;
+    setSortType: Dispatch<SetStateAction<EnumSort>>
+}
+
+export interface BackendSortingInterface {
+    sortType: "price" | "date";
+    sortOrder: "asc" | "desc";
 }

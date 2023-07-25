@@ -2,16 +2,26 @@ import {FC, useState} from 'react';
 import ProductsSlider from "@/components/UI/catalog/product_slider/ProductsSlider";
 import {IProduct} from "@/components/interfaces/Product.interface";
 import Sorting from "@/components/UI/catalog/sorting/Sorting";
-import {EnumSorting} from "@/components/interfaces/sorting.interface";
+import {EnumSort} from "@/components/interfaces/sorting.interface";
+import {useQuery} from "@tanstack/react-query";
+import ProductsService from "@/api/Products.service";
+import Loader from "@/components/UI/Loader/Loader";
 
 const Catalog :FC<{products: IProduct[]}> = ({products}) => {
-    const [sortingType, setSortingType] = useState<EnumSorting>(EnumSorting.NEWEST);
+    const [sortType, setSortType] = useState<EnumSort>(EnumSort.NEWEST);
+    const {data, isLoading} = useQuery(
+        ['products', sortType],
+        () => ProductsService.getAllProducts(sortType),
+        {initialData: products}
+    );
     return (
-        <div>
+        <div className='relative'>
           <div className={'text-right mt-10'}>
-              <Sorting sortingType={sortingType} setSortingType={setSortingType}/>
+              <Sorting sortType={sortType} setSortType={setSortType}/>
           </div>
-            <ProductsSlider products={products}/>
+            {isLoading ? <Loader/> :
+            <ProductsSlider products={data}/>
+            }
         </div>
     );
 };

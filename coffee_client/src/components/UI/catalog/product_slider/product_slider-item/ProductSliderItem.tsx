@@ -13,7 +13,7 @@ import {motion} from "framer-motion";
 import Link from "next/link";
 
 
-const ProductSliderItem:FC<IProductSliderItem> = ({product, index}) => {
+const ProductSliderItem:FC<IProductSliderItem> = ({product, index, productsCount}) => {
     const [selectedSize, setSelectedSize] = useState<TypeSize>('short');
     const {selectedItemIndex} = useProductSlider();
     const {selectItem} = useActions();
@@ -30,7 +30,7 @@ const ProductSliderItem:FC<IProductSliderItem> = ({product, index}) => {
             <div>
                 <ProductSliderSelectedItemHeader onSelectItem={
                     () => selectItem(index)
-                } product={product} isActive={isActive}/>
+                } product={product} isActive={isActive} productsCount={productsCount}/>
             <button className={styles.heading}  onClick={() => selectItem(index)}>
                 <span>
                 {product.name}

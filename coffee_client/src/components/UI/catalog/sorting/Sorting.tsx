@@ -6,17 +6,17 @@ import {SortingData} from "@/components/data/Sorting.data";
 import {ISortingProps} from "@/components/interfaces/sorting.interface";
 
 const Sorting:FC<ISortingProps> = ({
-    sortingType,
-    setSortingType
+    sortType,
+    setSortType
 }) => {
     return (
       <Menu>
           <MenuButton as={Button} leftIcon={<ChevronDownIcon/>}>
-                {SortingData.find((item) => item.value === sortingType)?.name}
+                {SortingData.find((item) => item.value === sortType)?.name}
           </MenuButton>
           <MenuList>
                 {SortingData.map((item) => (
-                    <MenuItem key={item.value} onClick={() => setSortingType(item.value)}>
+                    <MenuItem key={item.value} onClick={() => setSortType(item.value)}>
                         {item.name}
                     </MenuItem>
                 ))}
